@@ -105,10 +105,10 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     return;
                 }
                 switch(tokens){
-                    case ERROR:
+                    case Error:
                         resultado += "Simbolo no definido\n";
                         break;
-                    case Numero: case Identificador: case Reservadas:
+                    case Entero: case Identificador: case PalabraReservada:
                         resultado += lexer.lexeme + ": Es un " + tokens + "\n";
                         break;
                     default:
@@ -152,6 +152,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new vtnPrincipal().setVisible(true);
             }

@@ -5,7 +5,7 @@ import java.io.File;
 public class Principal {
     public static void main(String[] args) {
         System.out.println("Scanner");
-        String ruta = "Lexer.flex";
+        String ruta = "C:\\Users\\kenda\\OneDrive\\Documentos\\GitHub\\Scanner\\Scanner\\src\\codigo\\Lexer.flex";
         generarLexer(ruta);
     }
     public static void generarLexer(String ruta){
