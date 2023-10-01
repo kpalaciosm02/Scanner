@@ -6,7 +6,7 @@ import static codigo.Tokens.*;
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ |\t|\r|\n]+
+espacio=[ \t\r\n]+
 Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 %{
     public String lexeme;
@@ -58,9 +58,9 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "WRITE"  {lexeme=yytext(); return PalabraReservada;}
 
 {espacio} |
-"//"({L}|{D}|" "|"\t"|"\r")*"\n" |
-"{*"({L}|{D}|espacio)* "*}" |
-"{"({L}|{D}|espacio)* "}" {/*Ignore*/}
+"{*"~"*}" | 
+"//"[^\r\n]*|
+"{"~"}" {/*Ignore*/}
 
 
 "=" {lexeme=yytext(); return OperadorIgual; }
@@ -101,7 +101,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "MOD" {lexeme=yytext(); return OperadorMod; }
 
 
-[a-zA-Z][a-zA-Z0-9_]{0,126} {lexeme=yytext(); return Identificador; }
+[_A-Za-z][_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Identificador; }
 
 //ENTEROS
 0|[1-9][0-9]* {lexeme=yytext(); return Entero;}
@@ -119,4 +119,4 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 //STRINGS
 \"[a-zA-Z0-9_]*\" {lexeme=yytext(); return String;}
 
- . {return Error;}
+ . {lexeme=yytext(); return Error;}

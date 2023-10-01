@@ -108,8 +108,10 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 }
                 switch(tokens){
                     case Error:
-                        resultado += "Simbolo no definido\n";
+                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
                         break;
+                        //resultado += "Simbolo no definido\n";
+                        //break;
                     case Identificador:
                     case Entero:
                     case PalabraReservada:
