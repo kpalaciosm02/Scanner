@@ -100,8 +100,9 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "DIV" {lexeme=yytext(); return OperadorDiv; }
 "MOD" {lexeme=yytext(); return OperadorMod; }
 
+[^A-Za-z "][_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Error;}
 
-[_A-Za-z][_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Identificador; }
+(0|[1-9][0-9]*)[_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Identificador; }
 
 //ENTEROS
 0|[1-9][0-9]* {lexeme=yytext(); return Entero;}
@@ -109,8 +110,6 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 //FLOTANTES
 (0|[1-9][0-9]*)\.(0|[1-9][0-9]*){Exponente}? 
 |\.(0|[1-9][0-9]*){Exponente}? {lexeme=yytext(); return Flotante;}
-
-
 
 
 //CARACTERES
