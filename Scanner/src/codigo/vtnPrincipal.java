@@ -142,10 +142,10 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     case OperadorDiv:
                     case OperadorMod:
                     case OperadorNot:
-                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
+                        resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
                         break;
                     default:
-                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
+                        resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
                         break;
                 }
             }
