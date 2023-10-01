@@ -114,9 +114,9 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 
 
 //CARACTERES
-"“"[a-zA-Z0-9_]"”" {lexeme=yytext(); return Caracter;}
+\"[a-zA-Z0-9_]\" {lexeme=yytext(); return Caracter;}
 
 //STRINGS
-"“"[a-zA-Z0-9_]*"”" {lexeme=yytext(); return String;}
+\"[a-zA-Z0-9_]*\" {lexeme=yytext(); return String;}
 
  . {return Error;}
