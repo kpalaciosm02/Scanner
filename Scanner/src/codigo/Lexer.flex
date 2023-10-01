@@ -6,7 +6,8 @@ import static codigo.Tokens.*;
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ \t\r\n]+
+espacio=[ \t\r]+
+newline=[\n]+
 Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 %{
     public String lexeme;
@@ -62,6 +63,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "//"[^\r\n]*|
 "{"~"}" {/*Ignore*/}
 
+{newline} {return CambioLinea;}
 
 "=" {lexeme=yytext(); return OperadorIgual; }
 "," {lexeme=yytext(); return OperadorComa; }
