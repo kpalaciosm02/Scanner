@@ -63,45 +63,45 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "{"({L}|{D}|espacio)* "}" {/*Ignore*/}
 
 
-"=" { return OperadorIgual; }
-"," { return OperadorComa; }
-";" { return OperadorPuntoYComa; }
-"++" { return OperadorIncremento; }
-"--" { return OperadorDecremento; }
-">=" { return OperadorMayorOIgualQue; }
-">" { return OperadorMayorQue; }
-"<=" { return OperadorMenorOIgualQue; }
-"<" { return OperadorMenorQue; }
-"<>" { return OperadorDiferente; }
-"+" { return OperadorSuma; }
-"-" { return OperadorResta; }
-"*" { return OperadorMultiplicacion; }
-"/" { return OperadorDivision; }
-"(" { return OperadorParentesisIzquierdo; }
-")" { return OperadorParentesisDerecho; }
-"[" { return OperadorCorcheteIzquierdo; }
-"]" { return OperadorCorcheteDerecho; }
-":=" { return OperadorAsignacion; }
-"." { return OperadorPunto; }
-":" { return OperadorDosPuntos; }
-"+=" { return OperadorSumaAsignacion; }
-"-=" { return OperadorRestaAsignacion; }
-"*=" { return OperadorMultiplicacionAsignacion; }
-"/=" { return OperadorDivisionAsignacion; }
-">>" { return OperadorDesplazamientoDerecha; }
-"<<" { return OperadorDesplazamientoIzquierda; }
-"<<=" { return OperadorDesplazamientoIzquierdaAsignacion; }
-">>=" { return OperadorDesplazamientoDerechaAsignacion; }
+"=" {lexeme=yytext(); return OperadorIgual; }
+"," {lexeme=yytext(); return OperadorComa; }
+";" {lexeme=yytext(); return OperadorPuntoYComa; }
+"++" {lexeme=yytext(); return OperadorIncremento; }
+"--" {lexeme=yytext(); return OperadorDecremento; }
+">=" {lexeme=yytext(); return OperadorMayorOIgualQue; }
+">" {lexeme=yytext(); return OperadorMayorQue; }
+"<=" {lexeme=yytext(); return OperadorMenorOIgualQue; }
+"<" {lexeme=yytext(); return OperadorMenorQue; }
+"<>" {lexeme=yytext(); return OperadorDiferente; }
+"+" {lexeme=yytext(); return OperadorSuma; }
+"-" {lexeme=yytext(); return OperadorResta; }
+"*" {lexeme=yytext(); return OperadorMultiplicacion; }
+"/" {lexeme=yytext(); return OperadorDivision; }
+"(" {lexeme=yytext(); return OperadorParentesisIzquierdo; }
+")" {lexeme=yytext(); return OperadorParentesisDerecho; }
+"[" {lexeme=yytext(); return OperadorCorcheteIzquierdo; }
+"]" {lexeme=yytext(); return OperadorCorcheteDerecho; }
+":=" {lexeme=yytext(); return OperadorAsignacion; }
+"." {lexeme=yytext(); return OperadorPunto; }
+":" {lexeme=yytext(); return OperadorDosPuntos; }
+"+=" {lexeme=yytext(); return OperadorSumaAsignacion; }
+"-=" {lexeme=yytext(); return OperadorRestaAsignacion; }
+"*=" {lexeme=yytext(); return OperadorMultiplicacionAsignacion; }
+"/=" {lexeme=yytext(); return OperadorDivisionAsignacion; }
+">>" {lexeme=yytext(); return OperadorDesplazamientoDerecha; }
+"<<" {lexeme=yytext(); return OperadorDesplazamientoIzquierda; }
+"<<=" {lexeme=yytext(); return OperadorDesplazamientoIzquierdaAsignacion; }
+">>=" {lexeme=yytext(); return OperadorDesplazamientoDerechaAsignacion; }
 
-"NOT" { return OperadorNot; }
-"OR" { return OperadorOr; }
-"AND" { return OperadorAnd; }
-"XOR" { return OperadorXor; }
-"DIV" { return OperadorDiv; }
-"MOD" { return OperadorMod; }
+"NOT" {lexeme=yytext(); return OperadorNot; }
+"OR" {lexeme=yytext(); return OperadorOr; }
+"AND" {lexeme=yytext(); return OperadorAnd; }
+"XOR" {lexeme=yytext(); return OperadorXor; }
+"DIV" {lexeme=yytext(); return OperadorDiv; }
+"MOD" {lexeme=yytext(); return OperadorMod; }
 
 
-[a-zA-Z][a-zA-Z0-9_]{0,126} { return Identificador; }
+[a-zA-Z][a-zA-Z0-9_]{0,126} {lexeme=yytext(); return Identificador; }
 
 //ENTEROS
 0|[1-9][0-9]* {lexeme=yytext(); return Entero;}
