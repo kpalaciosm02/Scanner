@@ -1,11 +1,12 @@
 package codigo;
 import static codigo.Tokens.*;
 %%
+%ignorecase
 %class Lexer
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ \t\r\n]+
+espacio=[ |\t|\r|\n]+
 Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 %{
     public String lexeme;
@@ -91,6 +92,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "<<" { return OperadorDesplazamientoIzquierda; }
 "<<=" { return OperadorDesplazamientoIzquierdaAsignacion; }
 ">>=" { return OperadorDesplazamientoDerechaAsignacion; }
+
 "NOT" { return OperadorNot; }
 "OR" { return OperadorOr; }
 "AND" { return OperadorAnd; }

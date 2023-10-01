@@ -39,6 +39,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
         btnSeleccionarArchivo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtResultado = new javax.swing.JTextArea();
+        btnEscanear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,18 +54,32 @@ public class vtnPrincipal extends javax.swing.JFrame {
         txtResultado.setRows(5);
         jScrollPane1.setViewportView(txtResultado);
 
+        btnEscanear.setText("Escanear");
+        btnEscanear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscanearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(418, Short.MAX_VALUE)
-                .addComponent(btnSeleccionarArchivo)
-                .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnSeleccionarArchivo)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnEscanear)
+                                .addGap(157, 157, 157))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +88,9 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSeleccionarArchivo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEscanear)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
@@ -108,11 +125,49 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     case Error:
                         resultado += "Simbolo no definido\n";
                         break;
-                    case Entero: case Identificador: case PalabraReservada:
+                    case Identificador:
+                    case Entero:
+                    case PalabraReservada:
+                    case OperadorComa:
+                    case OperadorPuntoYComa:
+                    case OperadorIncremento:
+                    case OperadorDecremento:
+                    case OperadorMayorOIgualQue:
+                    case OperadorMayorQue:
+                    case OperadorMenorOIgualQue:
+                    case OperadorMenorQue:
+                    case OperadorDiferente:
+                    case OperadorIgual:
+                    case OperadorSuma:
+                    case OperadorResta:
+                    case OperadorMultiplicacion:
+                    case OperadorDivision:
+                    case OperadorParentesisIzquierdo:
+                    case OperadorParentesisDerecho:
+                    case OperadorCorcheteIzquierdo:
+                    case OperadorCorcheteDerecho:
+                    case OperadorAsignacion:
+                    case OperadorPunto:
+                    case OperadorDosPuntos:
+                    case OperadorSumaAsignacion:
+                    case OperadorRestaAsignacion:
+                    case OperadorMultiplicacionAsignacion:
+                    case OperadorDivisionAsignacion:
+                    case OperadorDesplazamientoDerecha:
+                    case OperadorDesplazamientoIzquierda:
+                    case OperadorDesplazamientoIzquierdaAsignacion:
+                    case OperadorDesplazamientoDerechaAsignacion:
+                    case OperadorOr:
+                    case OperadorAnd:
+                    case OperadorXor:
+                    case OperadorDiv:
+                    case OperadorMod:
+                    case OperadorNot:
                         resultado += lexer.lexeme + ": Es un " + tokens + "\n";
                         break;
                     default:
-                        throw new AssertionError();
+                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
+                        break;
                 }
             }
         }catch(FileNotFoundException e){
@@ -122,6 +177,10 @@ public class vtnPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
+
+    private void btnEscanearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscanearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEscanearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +219,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEscanear;
     private javax.swing.JButton btnSeleccionarArchivo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtResultado;
