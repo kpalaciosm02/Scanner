@@ -6,7 +6,8 @@ import static codigo.Tokens.*;
 %type Tokens
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ \t\r\n]+
+espacio=[ \t\r]+
+newline=[\n]+
 Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 %{
     public String lexeme;
@@ -62,6 +63,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "//"[^\r\n]*|
 "{"~"}" {/*Ignore*/}
 
+{newline} {return CambioLinea;}
 
 "=" {lexeme=yytext(); return OperadorIgual; }
 "," {lexeme=yytext(); return OperadorComa; }
@@ -100,9 +102,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "DIV" {lexeme=yytext(); return OperadorDiv; }
 "MOD" {lexeme=yytext(); return OperadorMod; }
 
-[^A-Za-z "][_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Error;}
-
-(0|[1-9][0-9]*)[_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Identificador; }
+[_A-Za-z][_A-Za-z0-9]*{0,126} {lexeme=yytext(); return Identificador; }
 
 //ENTEROS
 0|[1-9][0-9]* {lexeme=yytext(); return Entero;}

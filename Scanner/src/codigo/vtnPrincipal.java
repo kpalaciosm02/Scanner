@@ -84,21 +84,12 @@ public class vtnPrincipal extends javax.swing.JFrame {
     private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        /*File archivo = new File("salida.txt");
-        PrintWriter escritor;
-        
-        try{
-            escritor = new PrintWriter(archivo);
-            escritor.print("if");
-            escritor.close();
-        }catch(FileNotFoundException e){
-            JOptionPane.showMessageDialog(this,e.getMessage());
-        }*/
-        
         try{
             Reader lector = new BufferedReader(new FileReader(chooser.getSelectedFile()));
             Lexer lexer = new Lexer(lector);
+            txtResultado.setText("");
             String resultado = "";
+            int lineCounter = 1;
             while(true){
                 Tokens tokens = lexer.yylex();
                 if (tokens == null){
@@ -108,10 +99,11 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 }
                 switch(tokens){
                     case Error:
-                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
+                        resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter +"\n";
                         break;
-                        //resultado += "Simbolo no definido\n";
-                        //break;
+                    case CambioLinea:
+                        lineCounter++;
+                        break;
                     case Identificador:
                     case Entero:
                     case PalabraReservada:

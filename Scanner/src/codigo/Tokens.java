@@ -42,5 +42,6 @@ public enum Tokens {
     Flotante,
     Caracter,
     String,
-    Identificador
+    Identificador,
+    CambioLinea
 }
