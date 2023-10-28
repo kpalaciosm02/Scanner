@@ -107,41 +107,8 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     case Identificador:
                     case Entero:
                     case PalabraReservada:
-                    case OperadorComa:
-                    case OperadorPuntoYComa:
-                    case OperadorIncremento:
-                    case OperadorDecremento:
-                    case OperadorMayorOIgualQue:
-                    case OperadorMayorQue:
-                    case OperadorMenorOIgualQue:
-                    case OperadorMenorQue:
-                    case OperadorDiferente:
-                    case OperadorIgual:
-                    case OperadorSuma:
-                    case OperadorResta:
-                    case OperadorMultiplicacion:
-                    case OperadorDivision:
-                    case OperadorParentesisIzquierdo:
-                    case OperadorParentesisDerecho:
-                    case OperadorCorcheteIzquierdo:
-                    case OperadorCorcheteDerecho:
-                    case OperadorAsignacion:
-                    case OperadorPunto:
-                    case OperadorDosPuntos:
-                    case OperadorSumaAsignacion:
-                    case OperadorRestaAsignacion:
-                    case OperadorMultiplicacionAsignacion:
-                    case OperadorDivisionAsignacion:
-                    case OperadorDesplazamientoDerecha:
-                    case OperadorDesplazamientoIzquierda:
-                    case OperadorDesplazamientoIzquierdaAsignacion:
-                    case OperadorDesplazamientoDerechaAsignacion:
-                    case OperadorOr:
-                    case OperadorAnd:
-                    case OperadorXor:
-                    case OperadorDiv:
-                    case OperadorMod:
-                    case OperadorNot:
+                    case Operador:
+                        //System.out.println(lexer.lexeme);
                         resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
                         break;
                     default:
