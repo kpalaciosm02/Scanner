@@ -15,12 +15,6 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
     public String lexeme;
 %}
 %%
-/*"ARRAY" | "BEGIN" | "BOOLEAN" | "BYTE" | "CASE" | "CHAR" | "CONST" | "DO" | "DOWNTO" | "ELSE" | 
-"END" | "FALSE" | "FILE" | "FOR" | "FORWARD" | "FUNCTION" | "GOTO" | "IF" | "IN" | "INLINE" | 
-"INT" | "LABEL" | "LONGINT" | "NIL" | "OF" | "PACKED" | "PROCEDURE" | "PROGRAM" | "READ" | 
-"REAL" | "RECORD" | 
-"REPEAT" | "SET" | "SHORTINT" | "STRING" | "THEN" | "TO" | "TRUE" | "TYPE" | "UNTIL" | "VAR" | 
-"WHILE" | "WITH" | "WRITE"  {lexeme=yytext(); return PalabraReservada;}*/
 
 /* Definición de palabras reservadas */
 "ARRAY" { lexeme = yytext(); return ReservadaArray; }
@@ -104,7 +98,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "<" {lexeme=yytext(); return OperadorMenorQue; }
 "<>" {lexeme=yytext(); return OperadorDiferente; }
 "+" {lexeme=yytext(); return OperadorSuma; }
-"-" {lexeme=yytext(); return OperadorResta; }|12
+"-" {lexeme=yytext(); return OperadorResta; }
 "*" {lexeme=yytext(); return OperadorMultiplicacion; }
 "/" {lexeme=yytext(); return OperadorDivision; }
 "(" {lexeme=yytext(); return OperadorParentesisIzquierdo; }

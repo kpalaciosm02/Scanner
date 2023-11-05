@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 public class Principal {
     private static final String userPath = "C:\\Users\\kenda\\OneDrive\\Documentos\\GitHub\\";
     private static final String projectPath = "Scanner\\Scanner\\src\\codigo\\";
-    private static final String pathWithoutSrc = "Scanner\\Scanner";
+    private static final String pathWithoutSrc = "Scanner\\Scanner\\";
     public static void main(String[] args) throws Exception {
         String ruta1 = userPath+projectPath+"Lexer.flex";
         String ruta2 = userPath+projectPath+"LexerCup.flex";
@@ -32,7 +32,6 @@ public class Principal {
         archivo = new File(ruta2);
         JFlex.Main.generate(archivo);
         java_cup.Main.main(rutaS);
-        
         Path rutaSym = Paths.get(userPath+projectPath+"sym.java");
         if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
