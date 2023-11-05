@@ -106,11 +106,11 @@ public class vtnPrincipal extends javax.swing.JFrame {
                         break;
                     case Identificador:
                     case Entero:
-                    case PalabraReservada:
-                    case Operador:
+                    //case PalabraReservada:
+                    //case Operador:
                         //System.out.println(lexer.lexeme);
-                        resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
-                        break;
+                        //resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
+                        //break;
                     default:
                         resultado += lexer.lexeme + ": Es un " + tokens + " en la linea: " + lineCounter + "\n";
                         break;
