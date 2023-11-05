@@ -1,16 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package codigo;
-/* @author kpala */
-import java.io.File;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+/**
+ *
+ * @author Charly Ponce
+ */
 public class Principal {
-    public static void main(String[] args) {
-        String ruta = "C:\\Users\\kpala\\OneDrive\\Desktop\\Scanner\\Scanner\\src\\codigo\\Lexer.flex";
-        generarLexer(ruta);
+    private static final String userPath = "C:\\Users\\kenda\\OneDrive\\Documentos\\GitHub\\";
+    private static final String projectPath = "Scanner\\Scanner\\src\\codigo\\";
+    private static final String pathWithoutSrc = "Scanner\\Scanner";
+    public static void main(String[] args) throws Exception {
+        String ruta1 = userPath+projectPath+"Lexer.flex";
+        String ruta2 = userPath+projectPath+"LexerCup.flex";
+        String[] rutaS = {"-parser", "Sintax", userPath+projectPath+"Sintax.cup"};
+        generar(ruta1, ruta2, rutaS);
     }
-    public static void generarLexer(String ruta){
-        File archivo = new File(ruta);
+    public static void generar(String ruta1, String ruta2, String[] rutaS) throws IOException, Exception{
+        File archivo;
+        archivo = new File(ruta1);
         JFlex.Main.generate(archivo);
-        vtnPrincipal vp = new vtnPrincipal();
-        vp.setVisible(true);
+        archivo = new File(ruta2);
+        JFlex.Main.generate(archivo);
+        java_cup.Main.main(rutaS);
+        
+        Path rutaSym = Paths.get(userPath+projectPath+"sym.java");
+        if (Files.exists(rutaSym)) {
+            Files.delete(rutaSym);
+        } 
+        Path rutaSin = Paths.get(userPath+projectPath+"Sintax.java");
+        if (Files.exists(rutaSin)) {
+            Files.delete(rutaSin);
+        }
+        
+        Files.move(Paths.get(userPath+pathWithoutSrc+"sym.java"), 
+                Paths.get(userPath+projectPath+"sym.java")
+        );
+        Files.move(Paths.get(userPath+pathWithoutSrc+"Sintax.java"), 
+                Paths.get(userPath+projectPath+"Sintax.java")
+        );
     }
 }

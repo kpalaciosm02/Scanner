@@ -93,8 +93,6 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 \#[0-9]+ {lexeme=yytext(); return Caracter;}
 
 //Operadores
-//","|"="|"<"|">"|":"|"NOT"|"OR"|"AND"|"XOR"|"DIV"|"MOD"|"+"|"-"|"*"|"/"|";"|"("|")"|"["|"]"|":="|".."|"+="|"-="|"*="|"/="|"<="|">="|"<>"|"<<"|">>"|"<<="|">>=" {lexeme=yytext(); return Operador;}
-//Operadores
 "=" {lexeme=yytext(); return OperadorIgual; }
 "," {lexeme=yytext(); return OperadorComa; }
 ";" {lexeme=yytext(); return OperadorPuntoYComa; }
@@ -106,7 +104,7 @@ Exponente = [eE] [\+\-]? 0|[1-9][0-9]*
 "<" {lexeme=yytext(); return OperadorMenorQue; }
 "<>" {lexeme=yytext(); return OperadorDiferente; }
 "+" {lexeme=yytext(); return OperadorSuma; }
-"-" {lexeme=yytext(); return OperadorResta; }
+"-" {lexeme=yytext(); return OperadorResta; }|12
 "*" {lexeme=yytext(); return OperadorMultiplicacion; }
 "/" {lexeme=yytext(); return OperadorDivision; }
 "(" {lexeme=yytext(); return OperadorParentesisIzquierdo; }
