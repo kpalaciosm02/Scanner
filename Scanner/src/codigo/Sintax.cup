@@ -30,16 +30,21 @@ OperadorAsignacion, OperadorPunto, OperadorDosPuntos, OperadorSumaAsignacion, Op
 OperadorMultiplicacionAsignacion, OperadorDivisionAsignacion, OperadorDesplazamientoDerecha, 
 OperadorDesplazamientoIzquierda, OperadorDesplazamientoIzquierdaAsignacion, OperadorDesplazamientoDerechaAsignacion, 
 OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String;
-non terminal Inicio,SeccionConst, SeccionGlobales, SeccionFunciones, SeccionMain;
+non terminal Inicio,SeccionConst, LoopConst, ValorConst,
+ SeccionGlobales, SeccionFunciones, SeccionMain;
 
 start with Inicio;
 
 Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain
 ;
+SeccionConst::= ReservadaConst CambioLinea LoopConst;
+LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst|ε
+ValorConst ::= Entero | Flotante | String
+
+SeccionGlobales::=
 
 
-
-
+/*
 Inicio ::= SeccionMain;
 
 SeccionMain ::= ReservadaProgram Identificador CambioLinea SeccionConst SeccionGlobales SeccionFunciones ReservadaBegin SENTENCIA ReservadaEnd;
@@ -85,3 +90,4 @@ LLAMADA_FUNCION ::= Identificador OperadorParentesisIzquierdo ARGUMENTOS Operado
 ARGUMENTOS ::= EXPRESION | EXPRESION Coma ARGUMENTOS;
 
 RETURN ::= Identificador OperadorAsignacion EXPRESION P_coma | ε;
+*/
