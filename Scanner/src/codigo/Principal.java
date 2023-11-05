@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 /**
  *
- * @author Charly Ponce
+ * @author kenda
  */
 public class Principal {
     private static final String userPath = "C:\\Users\\kenda\\OneDrive\\Documentos\\GitHub\\";

@@ -34,15 +34,19 @@ non terminal Inicio,SeccionConst, LoopConst, ValorConst,
  SeccionGlobales, SeccionFunciones, SeccionMain;
 
 start with Inicio;
-
+/*no terminal inicial*/
 Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain
 ;
+
+/*Sección de constantes*/
 SeccionConst::= ReservadaConst CambioLinea LoopConst;
-LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst|ε
-ValorConst ::= Entero | Flotante | String
+LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst|ε;
+ValorConst ::= Entero | Flotante | String;
 
-SeccionGlobales::=
-
+/*Sección de variables globales*/
+SeccionGlobales ::= ReservadaVar CambioLinea LoopVar;
+LoopVar::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea LoopVar| Identificador OperadorComa LoopVar | ε
+Tipo ::= ReservadaInt | ReservadaLongInt | ReservadaShortInt | ReservadaChar | ReservadaString | ReservadaBoolean | ReservadaReal;
 
 /*
 Inicio ::= SeccionMain;
