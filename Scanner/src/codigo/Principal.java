@@ -16,7 +16,7 @@ import java.nio.file.Paths;
  * @author kenda
  */
 public class Principal {
-    private static final String userPath = "C:\\Users\\kenda\\OneDrive\\Documentos\\GitHub\\";
+    private static final String userPath = "C:\\Users\\kpala\\OneDrive\\Desktop\\";
     private static final String projectPath = "Scanner\\Scanner\\src\\codigo\\";
     private static final String pathWithoutSrc = "Scanner\\Scanner\\";
     public static void main(String[] args) throws Exception {

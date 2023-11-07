@@ -29,23 +29,22 @@ OperadorParentesisIzquierdo, OperadorParentesisDerecho, OperadorCorcheteIzquierd
 OperadorAsignacion, OperadorPunto, OperadorDosPuntos, OperadorSumaAsignacion, OperadorRestaAsignacion, 
 OperadorMultiplicacionAsignacion, OperadorDivisionAsignacion, OperadorDesplazamientoDerecha, 
 OperadorDesplazamientoIzquierda, OperadorDesplazamientoIzquierdaAsignacion, OperadorDesplazamientoDerechaAsignacion, 
-OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String;
+OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String, ε;
 non terminal Inicio,SeccionConst, LoopConst, ValorConst,
- SeccionGlobales, SeccionFunciones, SeccionMain;
+ SeccionGlobales, SeccionFunciones, SeccionMain, LoopVar, Tipo;
 
 start with Inicio;
 /*no terminal inicial*/
-Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain
-;
+Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain;
 
 /*Sección de constantes*/
 SeccionConst::= ReservadaConst CambioLinea LoopConst;
-LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst|ε;
+LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst | ε;
 ValorConst ::= Entero | Flotante | String;
 
 /*Sección de variables globales*/
 SeccionGlobales ::= ReservadaVar CambioLinea LoopVar;
-LoopVar::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea LoopVar| Identificador OperadorComa LoopVar | ε
+LoopVar::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea LoopVar| Identificador OperadorComa LoopVar | ε;
 Tipo ::= ReservadaInt | ReservadaLongInt | ReservadaShortInt | ReservadaChar | ReservadaString | ReservadaBoolean | ReservadaReal;
 
 /*
