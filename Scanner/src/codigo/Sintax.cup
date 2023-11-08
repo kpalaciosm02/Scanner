@@ -29,19 +29,25 @@ OperadorParentesisIzquierdo, OperadorParentesisDerecho, OperadorCorcheteIzquierd
 OperadorAsignacion, OperadorPunto, OperadorDosPuntos, OperadorSumaAsignacion, OperadorRestaAsignacion, 
 OperadorMultiplicacionAsignacion, OperadorDivisionAsignacion, OperadorDesplazamientoDerecha, 
 OperadorDesplazamientoIzquierda, OperadorDesplazamientoIzquierdaAsignacion, OperadorDesplazamientoDerechaAsignacion, 
-OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String, ε;
-non terminal Inicio,SeccionConst, LoopConst, ValorConst,
- SeccionGlobales, SeccionFunciones, SeccionMain, LoopVar, Tipo, LoopIdentificadores, OpcionesFunciones, ParamsFunciones;
+OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String, SeccionFuncionesAux, SeccionProcedures, AritmeticaTerminal, ε;
+
+non terminal Inicio,SeccionConst, LoopConst, ValorConst, ValorNum, OperacionesAritmeticas, SeccionGlobales, SeccionFunciones, 
+ SeccionMain, LoopVar, Tipo, LoopIdentificadores, OpcionesFunciones, ParamsFunciones, ParamsProcedures, Sentencia, LlamadaFuncion,
+ LlamadaFuncionNoParam, Asignacion, Definicion, Aritmetica, AritmeticaAux;
 
 start with Inicio;
 /*no terminal inicial*/
 /*Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain;*/
 Inicio ::= ReservadaProgram Identificador CambioLinea SeccionConst SeccionGlobales SeccionFunciones;
 
+OperacionesAritmeticas ::= OperadorSuma | OperadorResta | OperadorMultiplicacion | OperadorDivision;
+ValorNum ::= Entero | Flotante;
+
 /*Seccion constantes funcional*/
 SeccionConst ::= ReservadaConst CambioLinea LoopConst | ;
 LoopConst ::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst | ;
 ValorConst ::= Entero | Flotante | String;
+
 
 /*Seccion de variables globales funcional*/
 SeccionGlobales ::= ReservadaVar CambioLinea LoopVar | ;
@@ -50,55 +56,25 @@ LoopIdentificadores ::= Identificador OperadorComa LoopIdentificadores | Identif
 Tipo ::= ReservadaInt | ReservadaLongInt | ReservadaShortInt | ReservadaChar | ReservadaString | ReservadaBoolean | ReservadaReal;
 
 /*Seccion de funciones*/
-OpcionesFunciones ::= ReservadaFunction | ReservadaProcedure;
-ParamsFunciones ::= Tipo Identificador | Tipo Identificador OperadorComa ParamsFunciones;
-SeccionFunciones ::= OpcionesFunciones Identificador OperadorParentesisIzquierdo ParamsFunciones OperadorParentesisDerecho| ;
 
+ParamsFunciones ::= Tipo Identificador | Tipo Identificador OperadorComa ParamsFunciones| ;
 
-/*
-Inicio ::= SeccionMain;
+ParamsProcedures ::= Tipo Identificador | Tipo Identificador OperadorComa ParamsProcedures| ;
 
-SeccionMain ::= ReservadaProgram Identificador CambioLinea SeccionConst SeccionGlobales SeccionFunciones ReservadaBegin SENTENCIA ReservadaEnd;
+/*Faltan las sentencias de dentro de las funciones*/
+SeccionFunciones ::= (ReservadaFunction Identificador OperadorParentesisIzquierdo ParamsFunciones OperadorParentesisDerecho OperadorDosPuntos Tipo CambioLinea ReservadaBegin CambioLinea Sentencia ReservadaEnd CambioLinea) SeccionFunciones|(ReservadaProcedure Identificador OperadorParentesisIzquierdo ParamsProcedures OperadorParentesisDerecho CambioLinea ReservadaBegin CambioLinea Sentencia ReservadaEnd CambioLinea) SeccionFunciones| ;
 
-SeccionConst ::= ReservadaConst DECLARACION Const CambioLinea | ε;
+/*Sentencia universal que va dentro de una funcion*/
+Sentencia ::= CambioLinea Sentencia | LlamadaFuncion Sentencia | LlamadaFuncionNoParam Sentencia | Asignacion Sentencia | Definicion Sentencia | Aritmetica Sentencia | ;
 
-SeccionGlobales ::= ReservadaVar DECLARACION P_coma CambioLinea | ε;
+LlamadaFuncionNoParam ::= Identificador OperadorParentesisIzquierdo OperadorParentesisDerecho OperadorPuntoYComa CambioLinea;
+LlamadaFuncion ::= Identificador OperadorParentesisIzquierdo ValorConst OperadorParentesisDerecho OperadorPuntoYComa CambioLinea;
 
-SeccionFunciones ::= SeccionFunciones Funcion CambioLinea | ε;
+Asignacion ::= Identificador OperadorAsignacion ValorConst OperadorPuntoYComa CambioLinea | Identificador OperadorIncremento OperadorPuntoYComa CambioLinea | Identificador OperadorDecremento OperadorPuntoYComa CambioLinea | Identificador OperadorMultiplicacionAsignacion Entero OperadorPuntoYComa CambioLinea | Identificador OperadorDivisionAsignacion Entero OperadorPuntoYComa CambioLinea | Identificador OperadorAsignacion AritmeticaTerminal;
 
-DECLARACION ::= TIPO Identificador P_coma CambioLinea | TIPO Identificador Asignacion EXPRESION P_coma CambioLinea | ε;
+Definicion ::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea;
 
-TIPO ::= ReservadaInt | ReservadaLongInt | ReservadaShortInt | ReservadaChar | ReservadaString | ReservadaBoolean | ReservadaReal;
-
-SENTENCIA ::= SENTENCIA ASIGNACION P_coma CambioLinea | SENTENCIA CONTROL | SENTENCIA LLAMADA_FUNCION P_coma CambioLinea | ε;
-
-ASIGNACION ::= Identificador OperadorAsignacion EXPRESION | Identificador OperadorIncremento | OperadorIncremento Identificador;
-
-EXPRESION ::= EXPRESION_ARITMETICA | EXPRESION_BOOLEANA | Valor | Identificador;
-
-EXPRESION_ARITMETICA ::= EXPRESION Suma EXPRESION | EXPRESION Resta EXPRESION | EXPRESION Multiplicacion EXPRESION | EXPRESION Division EXPRESION | EXPRESION Mod EXPRESION | OperadorParentesisIzquierdo EXPRESION OperadorParentesisDerecho;
-
-EXPRESION_BOOLEANA ::= EXPRESION OperadorIgual EXPRESION | EXPRESION OperadorMayorOIgualQue EXPRESION | EXPRESION OperadorMayorQue EXPRESION | EXPRESION OperadorMenorOIgualQue EXPRESION | EXPRESION OperadorMenorQue EXPRESION | EXPRESION OperadorDiferente EXPRESION | EXPRESION OperadorOr EXPRESION | EXPRESION OperadorAnd EXPRESION | OperadorNot EXPRESION;
-
-CONTROL ::= WHILE | DO_WHILE | FOR | IF | IF_ELSE;
-
-WHILE ::= ReservadaWhile OperadorParentesisIzquierdo SENTENCIA_BOOLEANA OperadorParentesisDerecho ReservadaDo CUERPO;
-
-DO_WHILE ::= ReservadaDo CUERPO ReservadaWhile OperadorParentesisIzquierdo SENTENCIA_BOOLEANA OperadorParentesisDerecho P_coma;
-
-FOR ::= ReservadaFor OperadorParentesisIzquierdo DECLARACION_FOR P_coma SENTENCIA_BOOLEANA P_coma DECLARACION_FOR OperadorParentesisDerecho CUERPO;
-
-DECLARACION_FOR ::= Identificador OperadorAsignacion Entero | Identificador OperadorIncremento | OperadorIncremento Identificador;
-
-IF ::= ReservadaIf OperadorParentesisIzquierdo SENTENCIA_BOOLEANA OperadorParentesisDerecho CUERPO;
-
-IF_ELSE ::= ReservadaIf OperadorParentesisIzquierdo SENTENCIA_BOOLEANA OperadorParentesisDerecho CUERPO ReservadaElse CUERPO;
-
-CUERPO ::= Llave_a SENTENCIA Llave_c;
-
-LLAMADA_FUNCION ::= Identificador OperadorParentesisIzquierdo ARGUMENTOS OperadorParentesisDerecho;
-
-ARGUMENTOS ::= EXPRESION | EXPRESION Coma ARGUMENTOS;
-
-RETURN ::= Identificador OperadorAsignacion EXPRESION P_coma | ε;
-*/
+/*Aritmetica ::= Aritmetica OperacionesAritmeticas Aritmetica | OperadorParentesisIzquierdo Aritmetica OperadorParentesisDerecho | Identificador | ValorNum;*/
+Aritmetica ::= ValorNum OperacionesAritmeticas Aritmetica | ValorNum OperadorPuntoYComa CambioLinea | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho OperadorPuntoYComa CambioLinea | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho OperacionesAritmeticas Aritmetica;
+AritmeticaAux ::= ValorNum OperacionesAritmeticas AritmeticaAux | ValorNum | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho;
+AritmeticaTerminal ::= Aritmetica;

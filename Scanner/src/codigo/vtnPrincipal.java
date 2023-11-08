@@ -51,7 +51,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     resultado += "LINEA " + cont + "\n";
                     break;
                 case Identificador:
-                    resultado += "  <Identificador>\t\t" + lexer.lexeme + "\n";
+                    resultado += "  <Identificador>\t" + lexer.lexeme + "\n";
                     break;
                 case String:
                     resultado += "  <Cadena>\t\t" + lexer.lexeme + "\n";
@@ -107,7 +107,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 case ReservadaUntil:
                 case ReservadaWhile:
                 case ReservadaWrite:
-                    resultado += " <Reservada default>\t" + lexer.lexeme + "\n";
+                    resultado += "<" + token.toString()+ ">\t" + lexer.lexeme + "\n";
                     break;
                 case ReservadaVar:
                     resultado += " <Reservada var>\t" + lexer.lexeme + "\n";
@@ -118,8 +118,14 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 case OperadorPuntoYComa:
                     resultado += "  <Operador punto y coma>\t" + lexer.lexeme + "\n";
                     break;
+                case OperadorDivisionAsignacion:
+                    resultado += "  <Operador divsion asignacion>\t" + lexer.lexeme + "\n";
+                    break;
+                case OperadorIgual:
+                    resultado += "  <Operador asignacion>\t" + lexer.lexeme + "\n";
+                    break;
                 default:
-                    resultado += "  <Operador default>\t" + lexer.lexeme + "\n";
+                    resultado += "  <" + token +">\t" + lexer.lexeme + "\n";
                     break;
             }
         }
@@ -319,7 +325,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
             txtAnalizarSin.setForeground(new Color(25,111,61));
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + " Texto: \"" + (sym.value) + "\"\n");
+            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Caracter: " + (sym.left + 1) + " Texto: \"" + (sym.value) + "\"\n");
             //txtAnalizarSin.setText(ex.toString());
             txtAnalizarSin.setForeground(Color.red);
         }
