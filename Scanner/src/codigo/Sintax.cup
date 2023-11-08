@@ -33,7 +33,7 @@ OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Err
 
 non terminal Inicio,SeccionConst, LoopConst, ValorConst, ValorNum, OperacionesAritmeticas, SeccionGlobales, SeccionFunciones, 
  SeccionMain, LoopVar, Tipo, LoopIdentificadores, OpcionesFunciones, ParamsFunciones, ParamsProcedures, Sentencia, LlamadaFuncion,
- LlamadaFuncionNoParam, Asignacion, Definicion, Aritmetica, AritmeticaAux;
+ LlamadaFuncionNoParam, Asignacion, AsignacionAritmetica, Definicion, Aritmetica, AritmeticaAux;
 
 start with Inicio;
 /*no terminal inicial*/
@@ -65,16 +65,17 @@ ParamsProcedures ::= Tipo Identificador | Tipo Identificador OperadorComa Params
 SeccionFunciones ::= (ReservadaFunction Identificador OperadorParentesisIzquierdo ParamsFunciones OperadorParentesisDerecho OperadorDosPuntos Tipo CambioLinea ReservadaBegin CambioLinea Sentencia ReservadaEnd CambioLinea) SeccionFunciones|(ReservadaProcedure Identificador OperadorParentesisIzquierdo ParamsProcedures OperadorParentesisDerecho CambioLinea ReservadaBegin CambioLinea Sentencia ReservadaEnd CambioLinea) SeccionFunciones| ;
 
 /*Sentencia universal que va dentro de una funcion*/
-Sentencia ::= CambioLinea Sentencia | LlamadaFuncion Sentencia | LlamadaFuncionNoParam Sentencia | Asignacion Sentencia | Definicion Sentencia | Aritmetica Sentencia | ;
+Sentencia ::= CambioLinea Sentencia | LlamadaFuncion Sentencia | LlamadaFuncionNoParam Sentencia | Asignacion Sentencia | Definicion Sentencia | Aritmetica Sentencia | AsignacionAritmetica Sentencia | ;
 
 LlamadaFuncionNoParam ::= Identificador OperadorParentesisIzquierdo OperadorParentesisDerecho OperadorPuntoYComa CambioLinea;
 LlamadaFuncion ::= Identificador OperadorParentesisIzquierdo ValorConst OperadorParentesisDerecho OperadorPuntoYComa CambioLinea;
 
-Asignacion ::= Identificador OperadorAsignacion ValorConst OperadorPuntoYComa CambioLinea | Identificador OperadorIncremento OperadorPuntoYComa CambioLinea | Identificador OperadorDecremento OperadorPuntoYComa CambioLinea | Identificador OperadorMultiplicacionAsignacion Entero OperadorPuntoYComa CambioLinea | Identificador OperadorDivisionAsignacion Entero OperadorPuntoYComa CambioLinea | Identificador OperadorAsignacion AritmeticaTerminal;
+Asignacion ::= Identificador OperadorAsignacion ValorConst OperadorPuntoYComa CambioLinea | Identificador OperadorIncremento OperadorPuntoYComa CambioLinea | Identificador OperadorDecremento OperadorPuntoYComa CambioLinea | Identificador OperadorMultiplicacionAsignacion Entero OperadorPuntoYComa CambioLinea | Identificador OperadorDivisionAsignacion Entero OperadorPuntoYComa CambioLinea ;
+
+AsignacionAritmetica ::= Identificador OperadorAsignacion AritmeticaTerminal;
 
 Definicion ::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea;
 
-/*Aritmetica ::= Aritmetica OperacionesAritmeticas Aritmetica | OperadorParentesisIzquierdo Aritmetica OperadorParentesisDerecho | Identificador | ValorNum;*/
 Aritmetica ::= ValorNum OperacionesAritmeticas Aritmetica | ValorNum OperadorPuntoYComa CambioLinea | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho OperadorPuntoYComa CambioLinea | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho OperacionesAritmeticas Aritmetica;
 AritmeticaAux ::= ValorNum OperacionesAritmeticas AritmeticaAux | ValorNum | OperadorParentesisIzquierdo AritmeticaAux OperadorParentesisDerecho;
 AritmeticaTerminal ::= Aritmetica;

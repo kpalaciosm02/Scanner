@@ -113,6 +113,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     resultado += " <Reservada var>\t" + lexer.lexeme + "\n";
                     break;
                 case Error:
+                    txtAnalizarLex.setForeground(Color.red);
                     resultado += "  <Error>\t\t" + lexer.lexeme + "\n";
                     break;
                 case OperadorPuntoYComa:
