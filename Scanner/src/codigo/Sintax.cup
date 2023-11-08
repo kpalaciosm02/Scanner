@@ -31,21 +31,29 @@ OperadorMultiplicacionAsignacion, OperadorDivisionAsignacion, OperadorDesplazami
 OperadorDesplazamientoIzquierda, OperadorDesplazamientoIzquierdaAsignacion, OperadorDesplazamientoDerechaAsignacion, 
 OperadorNot, OperadorOr, OperadorAnd, OperadorXor, OperadorDiv, OperadorMod, Error, Identificador, Entero, Flotante, String, ε;
 non terminal Inicio,SeccionConst, LoopConst, ValorConst,
- SeccionGlobales, SeccionFunciones, SeccionMain, LoopVar, Tipo;
+ SeccionGlobales, SeccionFunciones, SeccionMain, LoopVar, Tipo, LoopIdentificadores, OpcionesFunciones, ParamsFunciones;
 
 start with Inicio;
 /*no terminal inicial*/
-Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain;
+/*Inicio ::= ReservadaProgram Identificador SeccionConst SeccionGlobales SeccionFunciones SeccionMain;*/
+Inicio ::= ReservadaProgram Identificador CambioLinea SeccionConst SeccionGlobales SeccionFunciones;
 
-/*Sección de constantes*/
-SeccionConst::= ReservadaConst CambioLinea LoopConst;
-LoopConst::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst | ε;
+/*Seccion constantes funcional*/
+SeccionConst ::= ReservadaConst CambioLinea LoopConst | ;
+LoopConst ::= Identificador OperadorIgual ValorConst OperadorPuntoYComa CambioLinea LoopConst | ;
 ValorConst ::= Entero | Flotante | String;
 
-/*Sección de variables globales*/
-SeccionGlobales ::= ReservadaVar CambioLinea LoopVar;
-LoopVar::= Identificador OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea LoopVar| Identificador OperadorComa LoopVar | ε;
+/*Seccion de variables globales funcional*/
+SeccionGlobales ::= ReservadaVar CambioLinea LoopVar | ;
+LoopVar ::= LoopIdentificadores OperadorDosPuntos Tipo OperadorPuntoYComa CambioLinea LoopVar | ;
+LoopIdentificadores ::= Identificador OperadorComa LoopIdentificadores | Identificador;
 Tipo ::= ReservadaInt | ReservadaLongInt | ReservadaShortInt | ReservadaChar | ReservadaString | ReservadaBoolean | ReservadaReal;
+
+/*Seccion de funciones*/
+OpcionesFunciones ::= ReservadaFunction | ReservadaProcedure;
+ParamsFunciones ::= Tipo Identificador | Tipo Identificador OperadorComa ParamsFunciones;
+SeccionFunciones ::= OpcionesFunciones Identificador OperadorParentesisIzquierdo ParamsFunciones OperadorParentesisDerecho| ;
+
 
 /*
 Inicio ::= SeccionMain;

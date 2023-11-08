@@ -47,5 +47,7 @@ public class Principal {
         Files.move(Paths.get(userPath+pathWithoutSrc+"Sintax.java"), 
                 Paths.get(userPath+projectPath+"Sintax.java")
         );
+        vtnPrincipal v = new vtnPrincipal();
+        v.setVisible(true);
     }
 }

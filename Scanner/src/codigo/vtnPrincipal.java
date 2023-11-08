@@ -51,7 +51,7 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     resultado += "LINEA " + cont + "\n";
                     break;
                 case Identificador:
-                    resultado += "  <Identificador>\t" + lexer.lexeme + "\n";
+                    resultado += "  <Identificador>\t\t" + lexer.lexeme + "\n";
                     break;
                 case String:
                     resultado += "  <Cadena>\t\t" + lexer.lexeme + "\n";
@@ -105,13 +105,18 @@ public class vtnPrincipal extends javax.swing.JFrame {
                 case ReservadaTrue:
                 case ReservadaType:
                 case ReservadaUntil:
-                case ReservadaVar:
                 case ReservadaWhile:
                 case ReservadaWrite:
                     resultado += " <Reservada default>\t" + lexer.lexeme + "\n";
                     break;
+                case ReservadaVar:
+                    resultado += " <Reservada var>\t" + lexer.lexeme + "\n";
+                    break;
                 case Error:
                     resultado += "  <Error>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case OperadorPuntoYComa:
+                    resultado += "  <Operador punto y coma>\t" + lexer.lexeme + "\n";
                     break;
                 default:
                     resultado += "  <Operador default>\t" + lexer.lexeme + "\n";
@@ -203,37 +208,40 @@ public class vtnPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 370, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSeleccionarArchivo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAnalizarLexico)))
-                        .addGap(249, 249, 249)
-                        .addComponent(btnLimpiarLexico)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(304, 304, 304))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(btnAnalizarSintaxis)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLimpiarSintaxis)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
+                                .addComponent(btnAnalizarLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(207, 207, 207)
+                                .addComponent(btnLimpiarLexico))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(304, 304, 304))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(332, 332, 332))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAnalizarSintaxis, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiarSintaxis, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(538, Short.MAX_VALUE)
@@ -250,22 +258,22 @@ public class vtnPrincipal extends javax.swing.JFrame {
                     .addComponent(btnSeleccionarArchivo)
                     .addComponent(btnAnalizarLexico)
                     .addComponent(btnLimpiarLexico))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnalizarSintaxis)
                     .addComponent(btnLimpiarSintaxis))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(76, 76, 76)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(411, Short.MAX_VALUE)))
+                    .addContainerGap(371, Short.MAX_VALUE)))
         );
 
         pack();
@@ -287,11 +295,11 @@ public class vtnPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
 
     private void btnLimpiarLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarLexicoActionPerformed
-        // TODO add your handling code here:
+        txtAnalizarLex.setText(null);
     }//GEN-LAST:event_btnLimpiarLexicoActionPerformed
 
     private void btnLimpiarSintaxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSintaxisActionPerformed
-        // TODO add your handling code here:
+        txtAnalizarSin.setText(null);
     }//GEN-LAST:event_btnLimpiarSintaxisActionPerformed
 
     private void btnAnalizarLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarLexicoActionPerformed
@@ -311,7 +319,8 @@ public class vtnPrincipal extends javax.swing.JFrame {
             txtAnalizarSin.setForeground(new Color(25,111,61));
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + " Texto: \"" + (sym.value) + "\"");
+            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + " Texto: \"" + (sym.value) + "\"\n");
+            //txtAnalizarSin.setText(ex.toString());
             txtAnalizarSin.setForeground(Color.red);
         }
     }//GEN-LAST:event_btnAnalizarSintaxisActionPerformed
